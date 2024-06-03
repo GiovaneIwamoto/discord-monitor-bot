@@ -1,6 +1,6 @@
 # DISCORD MONITOR BOT
 
-> ### **OVERVIEW**
+### **OVERVIEW**
 
 Discord Bot designed to monitor cryptocurrencies. The bot utilizes various libraries and services to provide real-time price quotes, send notifications, and operate efficiently and scalably on AWS infrastructure.
 
@@ -9,54 +9,54 @@ Discord Bot designed to monitor cryptocurrencies. The bot utilizes various libra
 
 ---
 
-> ### **ARCHITECTURE**
+### **ARCHITECTURE**
 
 ![alt text](image/diagram.jpg)
 
 ---
 
-> ### **FUNCTIONALITIES**
+### **FUNCTIONALITIES**
 
-**Cryptocurrency Monitoring**
+- **Cryptocurrency Monitoring**
 
-The bot utilizes the binance-api-node library to obtain real-time price quotes for specific currency pairs on Binance. Users can request the current price of any supported cryptocurrency pair on Binance through commands in Discord.
+  The bot utilizes the binance-api-node library to obtain real-time price quotes for specific currency pairs on Binance. Users can request the current price of any supported cryptocurrency pair on Binance through commands in Discord.
 
-**Discord Interaction**
+- **Discord Interaction**
 
-The bot uses the _discord.js_ library to create and manage its presence on Discord. It can receive and respond to user messages, executing commands to provide cryptocurrency price information.
+  The bot uses the _discord.js_ library to create and manage its presence on Discord. It can receive and respond to user messages, executing commands to provide cryptocurrency price information.
 
 > [!IMPORTANT]
 > It's essential to implement rate limiting mechanisms to prevent abuse and ensure the bot's stability and performance.
 
-**Webhook Notifications**
+- **Webhook Notifications**
 
-Using the axios library, the bot can send notifications to a specific Discord channel via webhooks. Notifications can be configured to be sent at regular intervals or when certain price criteria are met.
+  Using the axios library, the bot can send notifications to a specific Discord channel via webhooks. Notifications can be configured to be sent at regular intervals or when certain price criteria are met.
 
-**Task Scheduling**
+- **Task Scheduling**
 
-The bot uses the cron library to schedule price checks and send notifications at specific times. It can be configured to send a daily summary of cryptocurrency prices at certain time.
+  The bot uses the cron library to schedule price checks and send notifications at specific times. It can be configured to send a daily summary of cryptocurrency prices at certain time.
 
 ---
 
-> ### **INFRASTRUCTURE**
+### **INFRASTRUCTURE**
 
-**Docker**
+- **Docker**
 
-The entire bot application is packaged in a Docker container, ensuring consistency and ease of deployment. Using Docker allows the bot to run in any environment that supports containers, providing flexibility and portability.
+  The entire bot application is packaged in a Docker container, ensuring consistency and ease of deployment. Using Docker allows the bot to run in any environment that supports containers, providing flexibility and portability.
 
 > [!TIP]
 > Consider deploying your Docker image to Amazon Elastic Container Registry for enhanced management and security. ECR provides a secure and scalable repository for your Docker images, facilitating version control, access management, and integration with AWS services like ECS for container orchestration.
 
-**Amazon Web Services**
+- **Amazon Web Services**
 
-The bot is deployed on AWS to ensure high availability and scalability. The Dockerized application is deployed on an EC2 instance managed by Elastic Beanstalk. For monitoring and analysis, user interaction logs with the bot are stored in DynamoDB, a fully managed NoSQL database service that offers fast and predictable performance with automatic scaling.
+  The bot is deployed on AWS to ensure high availability and scalability. The Dockerized application is deployed on an EC2 instance managed by Elastic Beanstalk. For monitoring and analysis, user interaction logs with the bot are stored in DynamoDB, a fully managed NoSQL database service that offers fast and predictable performance with automatic scaling.
 
 > [!WARNING]
 > It is imperative for users to deploy their own application on AWS using their own credentials to ensure compliance and security. This ensures that users have full control over their application's environment and data, facilitating customization and enhancing security measures.
 
 ---
 
-> ### **AUTHORS**
+### **AUTHORS**
 
 [Giovane Iwamoto](https://github.com/GiovaneIwamoto) | [Rafael Oshiro](https://github.com/Reshzera) | [Matheus Tavares](https://github.com/mtguerson)
 
