@@ -60,7 +60,7 @@ Discord Bot designed to monitor cryptocurrencies. The bot utilizes various libra
 
 - Configure your AWS credentials managed by IAM:
 
-  ```
+  ```javascript
   $ aws configure
   AWS Access Key ID [None]: ACCESSKEYEXAMPLE
   AWS Secret Access Key [None]: SECRETKEYEXAMPLE
@@ -74,7 +74,7 @@ Discord Bot designed to monitor cryptocurrencies. The bot utilizes various libra
 - Set up environment variables:
   Create a `.env` file in the root of your project and add the following variables:
 
-```
+```shell
 APPLICATION_ID=your-application-id
 DISCORD_BOT_TOKEN=your-bot-token
 ```
@@ -85,20 +85,17 @@ DISCORD_BOT_TOKEN=your-bot-token
 
 - Discord OAuth2 Permissions:
 
-  Generate an invite link for your application by picking the scopes and permissions it needs to function. Under _OAuth2 URL Generator_ select the following:
-
-  **Scopes**: Mark the checkbox for bot.
-
-  **Bot Permissions**: Select the Administrator permission or choose the specific permissions your bot needs.
+  Generate an invite link for your application by picking the scopes and permissions it needs to function. Under `OAuth2 URL Generator` at **Scopes** mark the checkbox for **Bot** and set **Administrator** permission or choose the specific permissions your bot needs.
 
 - Yarn and Npm installation:
 
-```
-npm install -g yarn -> npm install
-yarn build -> yarn tsc -> yarn dev
+```shell
+npm install -g yarn | npm install
+yarn build | yarn tsc | yarn dev
 ```
 
-> [!TIP] > https://discord.com/developers/docs/intro
+> [!TIP]
+> Link: https://discord.com/developers/docs/intro
 
 ### **AUTHORS**
 
