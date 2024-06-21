@@ -56,8 +56,19 @@ Discord Bot designed to monitor cryptocurrencies. The bot utilizes various libra
 
 ---
 
+### **INSTALLATION GUIDE**
+
+```
+npm install -g yarn
+npm install
+yarn build
+yarn tsc
+yarn dev
+npm run dev
+```
+
 ### **AUTHORS**
 
-[Giovane Iwamoto](https://github.com/GiovaneIwamoto) | [Rafael Oshiro](https://github.com/Reshzera) | [Matheus Tavares](https://github.com/mtguerson)
+[Giovane Iwamoto](https://github.com/GiovaneIwamoto) | [Rafael Oshiro](https://github.com/Reshzera) | [Matheus Tavares](https://github.com/mtguerson) | [Alexandre Diniz](https://github.com/alexandredsz)
 
 We are always open to receiving constructive criticism and suggestions for improving our developed code. We believe that feedback is essential for learning and growth, and we are eager to learn from others to make our code the best it can be. Whether it's a minor tweak or a major overhaul, we are willing to consider all suggestions and implement changes that will benefit our code and its users.
