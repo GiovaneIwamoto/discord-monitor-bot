@@ -58,6 +58,21 @@ Discord Bot designed to monitor cryptocurrencies. The bot utilizes various libra
 
 ### **INSTALLATION GUIDE**
 
+- Configure your AWS credentials managed by IAM:
+
+  ```
+  $ aws configure
+  AWS Access Key ID [None]: ACCESSKEYEXAMPLE
+  AWS Secret Access Key [None]: SECRETKEYEXAMPLE
+  Default region name [None]: us-east-1
+  Default output format [None]: ENTER
+  ```
+
+> [!CAUTION]
+> Credentials should remain local to your environment only. Never expose your credentials on any part of the code.
+
+- Yarn and Npm installation
+
 ```
 npm install -g yarn
 npm install
