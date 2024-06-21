@@ -69,18 +69,35 @@ Discord Bot designed to monitor cryptocurrencies. The bot utilizes various libra
   ```
 
 > [!CAUTION]
-> Credentials should remain local to your environment only. Never expose your credentials on any part of the code.
+> Credentials should remain local to your environment only. Never expose your credentials in any part of the code, such as in source files, comments, or commit history. Instead, use environment variables or secure secret management tools to manage and access your credentials securely.
 
-- Yarn and Npm installation
+- Set up environment variables:
+  Create a `.env` file in the root of your project and add the following variables:
 
 ```
-npm install -g yarn
-npm install
-yarn build
-yarn tsc
-yarn dev
-npm run dev
+APPLICATION_ID=your-application-id
+DISCORD_BOT_TOKEN=your-bot-token
 ```
+
+- Discord Privileged Gateway Intents:
+
+  Some Gateway Intents require approval if your bot is verified. If your bot is not verified, you can toggle these intents to access them: `PRESENCE INTENT` `SERVER MEMBERS INTENT` `MESSAGE CONTENT INTENT`
+
+- Discord OAuth2 Permissions:
+  Generate an invite link for your application by picking the scopes and permissions it needs to function. Under _OAuth2 URL Generator_ select the following:
+
+  **Scopes**: Mark the checkbox for bot.
+
+  **Bot Permissions**: Select the Administrator permission or choose the specific permissions your bot needs.
+
+- Yarn and Npm installation:
+
+```
+npm install -g yarn -> npm install
+yarn build -> yarn tsc -> yarn dev
+```
+
+> [!TIP] > https://discord.com/developers/docs/intro
 
 ### **AUTHORS**
 
