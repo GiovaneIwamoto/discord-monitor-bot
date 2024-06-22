@@ -74,7 +74,7 @@ Discord Bot designed to monitor cryptocurrencies. The bot utilizes various libra
 - Set up environment variables:
   Create a `.env` file in the root of your project and add the following variables:
 
-```shell
+```ruby
 APPLICATION_ID=your-application-id
 DISCORD_BOT_TOKEN=your-bot-token
 ```
@@ -95,7 +95,7 @@ yarn build | yarn tsc | yarn dev
 ```
 
 > [!TIP]
-> Link: https://discord.com/developers/docs/intro
+> Discord Developer Portal: https://discord.com/developers/docs/intro
 
 ### **AUTHORS**
 

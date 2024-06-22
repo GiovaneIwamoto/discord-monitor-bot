@@ -1,10 +1,10 @@
 import { Client, GatewayIntentBits, REST, Routes } from 'discord.js';
-import dotenv from 'dotenv';
 import { DiscordBot, commands } from './bot';
+import dotenv from 'dotenv';
 import cron from 'node-cron';
 dotenv.config();
 
-// Cria uma instância do bot
+// Bot Intents
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -14,12 +14,12 @@ const client = new Client({
 });
 const botInstance = new DiscordBot();
 
-// Cria uma instância do REST para realizar requisições ao Discord
+// Create a REST instance to make requests to Discord
 const rest = new REST({ version: '10' }).setToken(
   `${process.env.DISCORD_BOT_TOKEN}`,
 );
 
-// Sincroniza os comandos de slash com o Discord
+// Synchronize slash commands with Discord
 async function syncronizeCommands() {
   try {
     console.log('Started refreshing application (/) commands.');
@@ -30,13 +30,13 @@ async function syncronizeCommands() {
         body: commands,
       },
     );
-
     console.log('Successfully reloaded application (/) commands.');
   } catch (error) {
     console.error(error);
   }
 }
-// Inicializa o bot
+
+// Initialize Discord bot
 function initBot() {
   client.once('ready', () => console.log('Bot is ready!'));
   client.login(process.env.DISCORD_BOT_TOKEN);
@@ -45,14 +45,14 @@ function initBot() {
   );
 }
 
-// Função principal
+// Main function
 function main() {
   syncronizeCommands();
   initBot();
 }
 main();
 
-//adicionar o chron para verificar o preço das moedas
+// Add chron to check coin prices
 cron.schedule('* * * * *', () => {
   botInstance.getCoinsPrice();
 });

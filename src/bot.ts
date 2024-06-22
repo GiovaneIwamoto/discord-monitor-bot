@@ -8,18 +8,17 @@ import { BotCommands } from './types/bot.types';
 export const commands: BotCommands[] = [
   {
     name: 'add_token',
-    description:
-      'Adiciona um par de tokens para ser monitorado Ex: /add_token BTC/USDT',
+    description: 'Add a token pair to be monitored Ex: /add_token BTC/USDT',
     options: [
       {
         name: 'add_token1',
-        description: 'Token a ser monitorado',
+        description: 'Token to be monitored',
         type: 3,
         required: true,
       },
       {
         name: 'add_token2',
-        description: 'Token a ser monitorado',
+        description: 'Token to be monitored',
         type: 3,
         required: true,
       },
@@ -28,17 +27,17 @@ export const commands: BotCommands[] = [
   {
     name: 'remove_token',
     description:
-      'Remove um par de tokens para deixar ser monitorado Ex: /remove_token BTC/USDT',
+      'Removes a token pair to let it be monitored Ex: /remove_token BTC/USDT',
     options: [
       {
         name: 'remove_token1',
-        description: 'Token a ser monitorado',
+        description: 'Token to be monitored',
         type: 3,
         required: true,
       },
       {
         name: 'remove_token2',
-        description: 'Token a ser monitorado',
+        description: 'Token to be monitored',
         type: 3,
         required: true,
       },
@@ -46,26 +45,26 @@ export const commands: BotCommands[] = [
   },
   {
     name: 'list_token',
-    description: 'Lista todos os tokens monitorados',
+    description: 'List all monitored tokens',
   },
   {
     name: 'set_channel',
-    description: 'Define o canal para enviar as notificações',
+    description: 'Set channel to receive notifications',
   },
   {
     name: 'get_all_coins_price',
-    description: 'Obtém o preço atual de todos os tokens monitorados',
+    description: 'Gets the current price of all monitored tokens',
   },
 ];
 
 export class DiscordBot {
   private CoinPair: string[];
-  private binaceBot: BinanceType;
+  private binanceBot: BinanceType;
   private channel: TextBasedChannel | null = null;
 
   constructor() {
     this.CoinPair = [];
-    this.binaceBot = Binance();
+    this.binanceBot = Binance();
   }
 
   public async handleCommand(interaction: Interaction<CacheType>) {
@@ -90,7 +89,7 @@ export class DiscordBot {
     }
     if (commandName === 'get_all_coins_price') {
       interaction.reply({
-        content: 'Obtendo preços...',
+        content: 'Getting cotations...',
       });
       await this.getCoinsPrice();
     }
@@ -104,13 +103,13 @@ export class DiscordBot {
 
     if (!token1 || !token2) {
       await interaction.reply({
-        content: 'Informe os tokens para serem monitorados',
+        content: 'Enter tokens to be monitored',
       });
       return;
     }
     this.CoinPair.push(`${token1}/${token2}`);
     await interaction.reply({
-      content: `Tokens adicionados com sucesso! ${token1}/${token2}`,
+      content: `Tokens added successfully! ${token1}/${token2}`,
     });
   }
 
@@ -122,7 +121,7 @@ export class DiscordBot {
 
     if (!token1 || !token2) {
       await interaction.reply({
-        content: 'Informe os tokens para serem removidos',
+        content: 'Report tokens to be removed',
       });
       return;
     }
@@ -131,7 +130,7 @@ export class DiscordBot {
 
     if (index === -1) {
       await interaction.reply({
-        content: 'Tokens não encontrados',
+        content: 'Tokens not found',
       });
       return;
     }
@@ -139,14 +138,14 @@ export class DiscordBot {
     this.CoinPair.splice(index, 1);
 
     await interaction.reply({
-      content: `Tokens removidos com sucesso! ${token1}/${token2}`,
+      content: `Tokens removed successfully! ${token1}/${token2}`,
     });
   }
 
   private async listToken(interaction: Interaction<CacheType>) {
     if (!interaction.isCommand()) return;
     await interaction.reply({
-      content: `Tokens monitorados: \n${this.CoinPair.join('\n')}`,
+      content: `Monitored tokens: \n${this.CoinPair.join('\n')}`,
     });
   }
 
@@ -155,20 +154,20 @@ export class DiscordBot {
     const { channel } = interaction;
     this.channel = channel;
     await interaction.reply({
-      content: `Canal de notificação definido com sucesso 🚀!`,
+      content: `Notification channel set successfully!`,
     });
   }
 
   public async getCoinsPrice() {
-    this.channel?.send('Iniciando monitoramento...');
+    this.channel?.send('Starting monitoring...');
 
     for (const coinPair of this.CoinPair) {
       const coinWithouSlash = coinPair.replace('/', '');
-      const dailyStatusCoin = (await this.binaceBot.dailyStats({
+      const dailyStatusCoin = (await this.binanceBot.dailyStats({
         symbol: coinWithouSlash,
       })) as DailyStatsResult;
       this.channel?.send(
-        `Preço atual de ${coinPair}: ${dailyStatusCoin.lastPrice}`,
+        `Current price of ${coinPair}: ${dailyStatusCoin.lastPrice}`,
       );
     }
   }
