@@ -92,6 +92,7 @@ DISCORD_BOT_TOKEN=your-bot-token
 ```shell
 npm install -g yarn | npm install
 yarn build | yarn tsc | yarn dev
+docker-compose build | docker-compose up
 ```
 
 > [!TIP]

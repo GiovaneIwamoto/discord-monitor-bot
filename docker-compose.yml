@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  app:
+    image: crypto_monitor_bot
+    container_name: crypto_monitor_bot
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    env_file:
+      - .env
+    restart: always
