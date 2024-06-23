@@ -8,8 +8,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install
-
+RUN npm install --only=production
 # Copy the rest of your application code to the working directory
 COPY . .
 
@@ -17,4 +16,4 @@ COPY . .
 EXPOSE 3000
 
 # Command to run your application
-CMD ["npm", "run", "dev"]
+CMD ["npm", "start"]

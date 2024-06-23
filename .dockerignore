@@ -1,0 +1,10 @@
+images
+node_modules
+.git
+Dockerfile
+.dockerignore
+.eslistrc.json
+.gitignore
+.prettierrc
+LICENSE
+README.md
