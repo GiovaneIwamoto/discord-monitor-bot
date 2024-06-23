@@ -28,6 +28,8 @@ Discord Bot designed to monitor cryptocurrencies. The bot utilizes various libra
 > [!IMPORTANT]
 > It's essential to implement rate limiting mechanisms to prevent abuse and ensure the bot's stability and performance.
 
+![alt text](images/discord_commands.png)
+
 - **Webhook Notifications**
 
   Bot send notifications to a specific Discord channel via webhooks. Notifications can be configured to be sent at regular intervals or when certain price criteria are met.
