@@ -25,6 +25,8 @@ Discord Bot designed to monitor cryptocurrencies. The bot utilizes various libra
 
   The bot uses the _discord.js_ library to create and manage its presence on Discord. It can receive and respond to user messages, executing commands to provide cryptocurrency price information.
 
+https://github.com/GiovaneIwamoto/discord-monitor-bot/assets/81972850/4c129aaa-2e39-4c69-be67-b53f6fad72e2
+
 > [!IMPORTANT]
 > It's essential to implement rate limiting mechanisms to prevent abuse and ensure the bot's stability and performance.
 
