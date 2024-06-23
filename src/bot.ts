@@ -146,7 +146,7 @@ export class DiscordBot {
       TableName: 'table_discord_bot_log',
       Item: {
         username: { S: userName },
-        log: { S: `User ${userName} added token ${token1}/${token2}` },
+        log: { S: `User ${userName} last added token ${token1}/${token2}` },
       },
     };
 
