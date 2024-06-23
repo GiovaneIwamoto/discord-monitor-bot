@@ -89,10 +89,12 @@ DISCORD_BOT_TOKEN=your-bot-token
 
   Generate an invite link for your application by picking the scopes and permissions it needs to function. Under `OAuth2 URL Generator` at **Scopes** mark the checkbox for **Bot** and set **Administrator** permission or choose the specific permissions your bot needs.
 
-- Deploy Docker image to ECR
+https://github.com/GiovaneIwamoto/discord-monitor-bot/assets/81972850/66a7d8a9-315d-49ca-8fed-21224c626904
 
 > [!IMPORTANT]
 > When deploying applications using AWS Elastic Container Service (ECS) that require access to services sensitive to geographic restrictions, such as the Binance API which is restricted in some countries like the United States, it is crucial to select the São Paulo (sa-east-1) region. This region ensures compliance with regional data sovereignty and access restrictions, facilitating seamless integration and operation of applications dependent on such external services.
+
+- Deploy Docker image to ECR
 
 ```ruby
 aws ecr get-login-password --region sa-east-1 | docker login --username AWS --password-stdin <aws_id>.dkr.ecr.sa-east-1.amazonaws.com
