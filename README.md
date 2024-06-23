@@ -30,7 +30,7 @@ Discord Bot designed to monitor cryptocurrencies. The bot utilizes various libra
 
 - **Webhook Notifications**
 
-  Using the axios library, the bot can send notifications to a specific Discord channel via webhooks. Notifications can be configured to be sent at regular intervals or when certain price criteria are met.
+  Bot send notifications to a specific Discord channel via webhooks. Notifications can be configured to be sent at regular intervals or when certain price criteria are met.
 
 - **Task Scheduling**
 
@@ -49,7 +49,9 @@ Discord Bot designed to monitor cryptocurrencies. The bot utilizes various libra
 
 - **Amazon Web Services**
 
-  The bot is deployed on AWS to ensure high availability and scalability. The Dockerized application is deployed on an EC2 instance managed by Elastic Beanstalk. For monitoring and analysis, user interaction logs with the bot are stored in DynamoDB, a fully managed NoSQL database service that offers fast and predictable performance with automatic scaling.
+AWS Elastic Container Registry (ECR) is utilized in this project to facilitate the deployment of Docker containers. ECR provides a secure and scalable repository for storing Docker images, allowing seamless integration with other AWS services such as AWS Elastic Container Service (ECS). AWS ECS manages the orchestration and deployment of Dockerized applications. Leveraging ECS, particularly with AWS Fargate, enables efficient and cost-effective deployment by abstracting away the underlying infrastructure management. ECS utilizes tasks to define the application’s container configurations and scheduling requirements, while clusters group together container instances to scale and manage workload distribution effectively.
+
+AWS CloudWatch plays a critical role in this ecosystem by providing centralized logging and monitoring for ECS deployments. CloudWatch enables real-time insights into application and infrastructure performance, facilitating proactive management through customizable metrics, alarms, and logs analysis. Monitoring ECS tasks and clusters via CloudWatch ensures operational visibility and helps maintain optimal performance and availability of deployed applications.
 
 > [!WARNING]
 > It is imperative for users to deploy their own application on AWS using their own credentials to ensure compliance and security. This ensures that users have full control over their application's environment and data, facilitating customization and enhancing security measures.
@@ -64,7 +66,7 @@ Discord Bot designed to monitor cryptocurrencies. The bot utilizes various libra
   $ aws configure
   AWS Access Key ID [None]: ACCESSKEYEXAMPLE
   AWS Secret Access Key [None]: SECRETKEYEXAMPLE
-  Default region name [None]: us-east-1
+  Default region name [None]: sa-east-1
   Default output format [None]: ENTER
   ```
 
@@ -87,11 +89,23 @@ DISCORD_BOT_TOKEN=your-bot-token
 
   Generate an invite link for your application by picking the scopes and permissions it needs to function. Under `OAuth2 URL Generator` at **Scopes** mark the checkbox for **Bot** and set **Administrator** permission or choose the specific permissions your bot needs.
 
-- Yarn and Npm installation:
+- Deploy Docker image to ECR
+
+> [!IMPORTANT]
+> Deploying ECS in the São Paulo (sa-east-1) Region
+> When deploying applications using AWS Elastic Container Service (ECS) that require access to services sensitive to geographic restrictions, such as the Binance API which is restricted in some countries like the United States, it is crucial to select the São Paulo (sa-east-1) region. This region ensures compliance with regional data sovereignty and access restrictions, facilitating seamless integration and operation of applications dependent on such external services.
+
+```ruby
+aws ecr get-login-password --region sa-east-1 | docker login --username AWS --password-stdin <aws_id>.dkr.ecr.sa-east-1.amazonaws.com
+docker build -t <image_name> .
+docker tag <image_name>:latest <aws_id>.dkr.ecr.sa-east-1.amazonaws.com/<image_name>:latest
+docker push <aws_id>.dkr.ecr.sa-east-1.amazonaws.com/<image_name>:latest
+```
+
+- Local development:
 
 ```shell
-npm install -g yarn | npm install
-yarn build | yarn tsc | yarn dev
+npm install | npm run build | npm run start
 docker-compose build | docker-compose up
 ```
 
