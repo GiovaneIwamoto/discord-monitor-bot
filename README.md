@@ -11,7 +11,7 @@ Discord Bot designed to monitor cryptocurrencies. The bot utilizes various libra
 
 ### **ARCHITECTURE**
 
-![alt text](images/diagram.jpg)
+![alt text](images/architecture.jpg)
 
 ---
 
@@ -92,7 +92,6 @@ DISCORD_BOT_TOKEN=your-bot-token
 - Deploy Docker image to ECR
 
 > [!IMPORTANT]
-> Deploying ECS in the São Paulo (sa-east-1) Region
 > When deploying applications using AWS Elastic Container Service (ECS) that require access to services sensitive to geographic restrictions, such as the Binance API which is restricted in some countries like the United States, it is crucial to select the São Paulo (sa-east-1) region. This region ensures compliance with regional data sovereignty and access restrictions, facilitating seamless integration and operation of applications dependent on such external services.
 
 ```ruby
