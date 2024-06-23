@@ -3,6 +3,14 @@ import Binance, {
   DailyStatsResult,
 } from 'binance-api-node';
 import { CacheType, Interaction, TextBasedChannel } from 'discord.js';
+import {
+  DynamoDBClient,
+  CreateTableCommand,
+  PutItemCommand,
+  AttributeDefinition,
+  KeySchemaElement,
+} from '@aws-sdk/client-dynamodb';
+
 import { BotCommands } from './types/bot.types';
 
 export const commands: BotCommands[] = [
@@ -61,10 +69,44 @@ export class DiscordBot {
   private CoinPair: string[];
   private binanceBot: BinanceType;
   private channel: TextBasedChannel | null = null;
+  private dynamoClient: DynamoDBClient;
 
   constructor() {
     this.CoinPair = [];
     this.binanceBot = Binance();
+    this.dynamoClient = new DynamoDBClient({ region: 'us-east-1' });
+    this.createTable();
+  }
+
+  private async createTable() {
+    const params = {
+      TableName: 'table_discord_bot_log',
+      KeySchema: [
+        { AttributeName: 'username', KeyType: 'HASH' },
+      ] as KeySchemaElement[],
+      AttributeDefinitions: [
+        { AttributeName: 'username', AttributeType: 'S' },
+      ] as AttributeDefinition[],
+      ProvisionedThroughput: {
+        ReadCapacityUnits: 5,
+        WriteCapacityUnits: 5,
+      },
+    };
+
+    try {
+      await this.dynamoClient.send(new CreateTableCommand(params));
+      console.log('Table created successfully');
+    } catch (error) {
+      if (error instanceof Error) {
+        if (error.name === 'ResourceInUseException') {
+          console.log('Table already exists');
+        } else {
+          console.error('Error creating table:', error);
+        }
+      } else {
+        console.error('Unexpected error:', error);
+      }
+    }
   }
 
   public async handleCommand(interaction: Interaction<CacheType>) {
@@ -95,13 +137,37 @@ export class DiscordBot {
     }
   }
 
+  private async logToDynamoDB(
+    userName: string,
+    token1: string,
+    token2: string,
+  ) {
+    const params = {
+      TableName: 'table_discord_bot_log',
+      Item: {
+        username: { S: userName },
+        log: { S: `User ${userName} added token ${token1}/${token2}` },
+      },
+    };
+
+    try {
+      await this.dynamoClient.send(new PutItemCommand(params));
+      console.log('Log saved successfully');
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error('Error saving log:', error);
+      } else {
+        console.error('Unexpected error:', error);
+      }
+    }
+  }
+
   private async addToken(interaction: Interaction<CacheType>) {
     if (!interaction.isCommand()) return;
     const { options } = interaction;
-    const token1 = options.get('add_token1')?.value;
-    const token2 = options.get('add_token2')?.value;
-
-    // const userName = interaction.user.username;
+    const token1 = options.get('add_token1')?.value as string;
+    const token2 = options.get('add_token2')?.value as string;
+    const userName = interaction.user.username;
 
     if (!token1 || !token2) {
       await interaction.reply({
@@ -111,7 +177,7 @@ export class DiscordBot {
     }
     this.CoinPair.push(`${token1}/${token2}`);
 
-    // console.log(`User ${userName} added token ${token1}/${token2}`);
+    await this.logToDynamoDB(userName, token1, token2);
 
     await interaction.reply({
       content: `Tokens added successfully! ${token1}/${token2}`,
@@ -121,8 +187,8 @@ export class DiscordBot {
   private async removeToken(interaction: Interaction<CacheType>) {
     if (!interaction.isCommand()) return;
     const { options } = interaction;
-    const token1 = options.get('remove_token1')?.value;
-    const token2 = options.get('remove_token2')?.value;
+    const token1 = options.get('remove_token1')?.value as string;
+    const token2 = options.get('remove_token2')?.value as string;
 
     if (!token1 || !token2) {
       await interaction.reply({
