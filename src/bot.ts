@@ -101,6 +101,8 @@ export class DiscordBot {
     const token1 = options.get('add_token1')?.value;
     const token2 = options.get('add_token2')?.value;
 
+    // const userName = interaction.user.username;
+
     if (!token1 || !token2) {
       await interaction.reply({
         content: 'Enter tokens to be monitored',
@@ -108,6 +110,9 @@ export class DiscordBot {
       return;
     }
     this.CoinPair.push(`${token1}/${token2}`);
+
+    // console.log(`User ${userName} added token ${token1}/${token2}`);
+
     await interaction.reply({
       content: `Tokens added successfully! ${token1}/${token2}`,
     });
