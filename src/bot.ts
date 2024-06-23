@@ -237,9 +237,21 @@ export class DiscordBot {
       const dailyStatusCoin = (await this.binanceBot.dailyStats({
         symbol: coinWithouSlash,
       })) as DailyStatsResult;
-      this.channel?.send(
-        `Current price of ${coinPair}: ${dailyStatusCoin.lastPrice}`,
-      );
+
+      const coinPrice = Number(dailyStatusCoin.lastPrice);
+      const coinCurrency =
+        coinPair.split('/')[1] === 'USDT' ? 'USD' : coinPair.split('/')[1];
+
+      const formattedPrice = this.formatCurrency(coinPrice, coinCurrency);
+
+      this.channel?.send(`Current price of ${coinPair}: ${formattedPrice}`);
     }
+  }
+
+  private formatCurrency(value: number, currency: string) {
+    return new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency,
+    }).format(value);
   }
 }
