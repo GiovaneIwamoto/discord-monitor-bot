@@ -53,14 +53,17 @@ https://github.com/GiovaneIwamoto/discord-monitor-bot/assets/81972850/698b01c1-1
 
 - **Amazon Web Services**
 
-AWS Elastic Container Registry (ECR) is utilized in this project to facilitate the deployment of Docker containers. ECR provides a secure and scalable repository for storing Docker images, allowing seamless integration with other AWS services such as AWS Elastic Container Service (ECS). AWS ECS manages the orchestration and deployment of Dockerized applications. Leveraging ECS, particularly with AWS Fargate, enables efficient and cost-effective deployment by abstracting away the underlying infrastructure management. ECS utilizes tasks to define the application’s container configurations and scheduling requirements, while clusters group together container instances to scale and manage workload distribution effectively.
+  AWS Elastic Container Registry (ECR) is utilized in this project to facilitate the deployment of Docker containers. ECR provides a secure and scalable repository for storing Docker images, allowing seamless integration with other AWS services such as AWS Elastic Container Service (ECS). AWS ECS manages the orchestration and deployment of Dockerized applications. Leveraging ECS, particularly with AWS Fargate, enables efficient and cost-effective deployment by abstracting away the underlying infrastructure management. ECS utilizes tasks to define the application’s container configurations and scheduling requirements, while clusters group together container instances to scale and manage workload distribution effectively.
 
-AWS CloudWatch plays a critical role in this ecosystem by providing centralized logging and monitoring for ECS deployments. CloudWatch enables real-time insights into application and infrastructure performance, facilitating proactive management through customizable metrics, alarms, and logs analysis. Monitoring ECS tasks and clusters via CloudWatch ensures operational visibility and helps maintain optimal performance and availability of deployed applications.
+  AWS CloudWatch plays a critical role in this ecosystem by providing centralized logging and monitoring for ECS deployments. CloudWatch enables real-time insights into application and infrastructure performance, facilitating proactive management through customizable metrics, alarms, and logs analysis. Monitoring ECS tasks and clusters via CloudWatch ensures operational visibility and helps maintain optimal performance and availability of deployed applications.
 
 > [!WARNING]
 > It is imperative for users to deploy their own application on AWS using their own credentials to ensure compliance and security. This ensures that users have full control over their application's environment and data, facilitating customization and enhancing security measures.
 
 https://github.com/GiovaneIwamoto/discord-monitor-bot/assets/81972850/f299bedc-1005-4e5d-9ff8-d14c12544626
+
+> [!IMPORTANT]
+> To enable access to DynamoDB, the user must configure the ecsTaskExecutionRole by attaching the AmazonDynamoDBFullAccess permission policy. This grants the necessary permissions for the ECS tasks to interact with DynamoDB resources, ensuring seamless data management and operations within the application.
 
 ---
 
