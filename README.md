@@ -4,6 +4,9 @@
 
 Discord Bot designed to monitor cryptocurrencies. The bot utilizes various libraries and services to provide real-time price quotes, send notifications, and operate efficiently and scalably on AWS infrastructure.
 
+[![Icons](https://skillicons.dev/icons?i=aws,nodejs,yarn,ts,docker,discord&theme=dark)](https://skillicons.dev)
+
+
 > [!NOTE]
 > This project showcases the integration of various technologies to create a robust and efficient Discord bot for monitoring cryptocurrencies. As an open-source project, it welcomes contributions and feedback from the community to continually improve and enhance its features.
 
@@ -83,8 +86,6 @@ Default output format [None]: ENTER
 > Credentials should remain local to your environment only. Never expose your credentials in any part of the code, such as in source files, comments, or commit history. Instead, use environment variables or secure secret management tools to manage and access your credentials securely.
 
 - Set up environment variables:
-
-  Create a `.env` file in the root of your project and add the following variables:
 
 ```ruby
 APPLICATION_ID=your-application-id
