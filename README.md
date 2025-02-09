@@ -14,7 +14,7 @@ Discord Bot designed to monitor cryptocurrencies. The bot utilizes various libra
 
 ### **ARCHITECTURE**
 
-![alt text](images/architecture.jpg)
+![alt text](images/architecture.png)
 
 ---
 
